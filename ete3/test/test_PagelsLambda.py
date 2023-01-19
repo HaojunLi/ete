@@ -1,9 +1,12 @@
 import unittest
-from PagelsLambda import *
+import sys
+sys.path.append("..")
+sys.path.append("./ete3")
+from tools.ete_PagelsLambda import *
 import numpy as np
 import pandas as pd
 from ete3 import Tree
-# Just for test
+
 # python -m unittest [filename]
 
 # Assistance function
@@ -21,8 +24,8 @@ def traitsColumnReturn(df, traits_name):
 Simjoly. (n.d.). Simjoly/CourseComparativeMethods: Examples of application of comparative methods in R. GitHub. Retrieved December 7, 2022, from https://github.com/simjoly/CourseComparativeMethods 
 '''
 def Seedplant_sanity_assistance():
-  seedplant = Tree("../seedplantData/seedplantsNew.tre", format = 0)
-  df = pd.read_csv("../seedplantData/seedplants_Formatted.csv")
+  seedplant = Tree("./seedplantData/seedplantsNew.tre", format = 0)
+  df = pd.read_csv("./seedplantData/seedplants_Formatted.csv")
   # This works drop all rows with NAN value
   df = df.dropna()
   keep = list(df.loc[:,"Code"])
@@ -220,3 +223,6 @@ class Test_Ln_Brownian_motion_likelihood(unittest.TestCase):
     self.assertRaises(TypeError, Found_Pagel_Maximumlikelihood, np.array([[3],[2],[1]]), Tree("(B:1,(C:1,D:1):0.5);"), 0.1, 'a', 1)
     self.assertRaises(TypeError, Found_Pagel_Maximumlikelihood, np.array([[3],[2],[1]]), Tree("(B:1,(C:1,D:1):0.5);"), 0.1, 0, 'a')
 # Unittest Finished
+
+if __name__ == "__main__":
+    unittest.main()
